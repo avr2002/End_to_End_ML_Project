@@ -88,3 +88,8 @@ To Stop Docker Container
 ```
 docker stop <container_id>
 ```
+
+To install packages & libraries
+```
+python setup.py install
+```
