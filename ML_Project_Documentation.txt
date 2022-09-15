@@ -1,0 +1,234 @@
+Starting my ML Project - 
+1. Setting up Github repo and cloning it in my local system
+
+
+git commands:
+1. git clone url_link - to clone a repo onto local system
+2. git pull - to update the repo
+3. git add file1,file2,... - to add files to github
+4. git add . - to add all the files 
+5. git status - to see if the file is uploaded or not to git
+
+benifits of git:
+1. Helps multiple developers work same time on a single project
+2. Version Control System
+3. Branching - main & integration branch - every changes are done in integration branch & finally merged to main branch
+4. merge conflict
+
+Docker:
+	- Portability of our code
+	- Container
+	- Image
+	- Isolation
+Using Docker -
+	- Download the docker image: docker pull image_name
+	- docker run image_name
+
+
+What is Docker, Container?
+
+		https://docs.docker.com/get-started/overview/
+
+		Docker provides the ability to package and run an application in a loosely isolated environment 
+		called a Container. 
+
+		Containers are lightweight and contain everything needed to run the application, so you do not 
+		need to rely on what is currently installed on the host. 
+
+
+What is CI/CD Pipeline?
+
+		https://about.gitlab.com/topics/ci-cd/
+
+		So, in our code we have setup CI+CD Pipeline which will automatically integrate & deploy any 
+		changes made by us.
+
+
+
+Setting up folder structure for the project:
+Here: 
+	housing - main/root folder
+		logger - logging module->(__init__.py)
+
+		exception module - for exception handling
+
+		entity module  
+		config module
+
+		component module - dicussed below in ML Pipeline, all the componenets together form Pipeline
+		pipeline module
+
+
+
+										Machine Learning Pipeline
+									   ---------------------------
+
+Data Ingestion --->   Data Validation --------------------> Feature Engeneering/ --->   Model Training    ---->	    Model Evaluation	----> Push the Model
+--------------	   -----------------------------------		Data Tranformation		    --------------		        ----------------
+Split Data into		   1.Schema Validation					-------------------		    Model Selection		        - Use Test Dataset
+ Train-Test		     (Check - FileName,						Create a Pickle Object	    Hyperparameter Tuning 		- Model Comaprison
+(Bring data		      # of columns file has,				for feature engineering,    							
+into system           name & datatype of each column)	  to apply same on test data    Similarly, create a pickle
+via API or URL												(Tranform_Function)  		object of model training
+or any DataBase)	   2. Check:														  (predict_function)
+					  Null values, Outliers/Anomalies,									
+					  Imbalanced Dataset, Data Range
+					  Duplicate Datas 
+					
+				   3. Data Drift - When the statistics
+						(summary of the dataset)
+					 	of the old dataset does not align 
+						with the new one, that is called
+						Data Drift, which is not good for
+						model performance.
+	
+
+				   
+
+
+# Creating a Pickle file for has benifits as:
+
+Prediction Pipeline
+--------------------
+
+Real World Dataset -----> Pass it to Transform_Function  ------> Pass the tranformed dataset   ---------> Directly Get the
+						  to get tranformed dataset				 to predict_function i.e use				Prediction
+						  (i.e use the pickled file				 the pickled file created during
+						  created during 						 Model Training Step.
+						  DataTransformation step.
+						
+
+					  
+
+Pickle File
+------------
+- Saving object into file is called Serializarion.
+- Loading object from file is called de-Serializarion.
+
+class PickleDemo():
+	
+	def __init__(self):
+		pass
+
+pd = PickleDemo()
+
+Now I can save this object 'pd' as a pickle file, similarly we can also save our ML models into a pickle
+file for later usage.
+
+import pickle
+
+pickle.dumps(pd, open('file_name.pkl', 'wb')) # Serialization
+
+pickled_obj = open('file_name.pkl', 'rb') # De-Serialization
+
+# Similarly for any model like
+---------------------------------
+from sklearn.linear_model import LinearRegression
+
+linreg = LinearRegression()
+
+pickle.dumps(linreg, open('linear_reg_model.pkl', 'wb')) # Saving the trained model
+
+pickled_model = open('linear_reg_model.pkl', 'rb') # Opening the saved model
+
+
+
+
+# Summarizing the Complete ML Pipeline, we have
+
+
+Incoming_Data ----> Feature Eng. Object ----> Model Training Object ----> Prediction
+					(Pickled File for		  (Pickled File for
+					Data Tranformation)		   Making Prediction)
+
+				   -----------------------------------------------------
+									Deployment Artifact
+
+
+
+
+MLOps:
+	  - DevOps:
+			DevOps is the combiantion of cultural philosophies, practices,
+			and tools that increases the organisation's ability to deliver
+			applications & services at high velocity.
+		
+			 - CI+CD (Continuous Integration, Continuous Deployment)
+			 - Code Versioning
+
+	  - Data Versioning
+	  - CT
+	
+MLOps is same as DevOps along with some extra things - Data Versioning and Continuous Training(CT)
+
+DevOps is:
+	- Maintining Versions of your code
+	- Integrating Changes to your Code (CI)
+	- And How frequently you can deploy changes
+	  to your code so that changes can be accessible to user (CD)
+
+MLOps is all 3 above along with:
+	- Data Versioning - New Data coming to pipeline or if Data Modeified.
+						To implement Data V, we can use Timestamps or by creating a Hash Value.
+
+	- Continuous Training(CT) - If we have new dataset, we can trigger the pipeline and genereate
+								a new/better model based on the new dataset. This is CT.
+
+
+So, MLOps is all about, if the data/ code gets changed, you can trigger the pipeline and generate
+a new model. It's combination of both data & code. If anything get's changed you have to generate
+a new model and for that you need to have a well establised pipeline which can check lots of 
+validation & model evaluation. 
+
+
+
+Understanding entity module
+---------------------------
+
+Artifact - Any kind of o/p or file that gets generated when we run the pipeline is called an Artifact
+		   like, the pickle model we create is an artifact,
+		   the train-test split we do is an artifact,
+		   the feature engeneering we do,we generate data_transformer object is an arifact
+Any file, any model, any graph that gets generated when pipeline runs is an Artifact.
+So, in DevOps/MLOps anything that gets generated when pipeline runs is called Artifact.
+
+
+In the entity module, we define artifact for each component of the pipeline, i.e. whatever kind of output
+we are going to get from each component of pipeline, we are going to define in the entity module.
+
+So, we can create classes:
+		- Data_Ingestion Artifact
+		- Data_Validation Artifact
+		- Data_Transformation Artifact
+		- Model_Trainer Artifact
+		- Model_Evaluation Artifact
+		- Model_Pusher Artifact
+
+So, for eg. Data_Ingestion Artifact is the output generated by Data_Ingestion component but we also
+need to provide the input source for the component like from where it will get the data(like from
+database, or url, or cloud, etc..). So, we need to define a structure which will fetch the required
+inputs for each module/component to run and this is also done in entity module itself.
+
+So, we can create classes:
+	- Data_Ingestion Config
+	- Data_Validation Config
+	- Data_Transformation Config
+	- Model_Trainer Config
+	- Model_Evaluation Config
+	- Model_Pusher Config
+
+So, config is the inputs required to generate the artifact.
+
+Now we can have the o/p of a particular module/component as the i/p for the another component
+like at Data_Ingestion stage we split the data into train-test set, which is it's o/p, but this o/p
+(train set) is the i/p for the Data_Validation component, similarly it's o/p is the i/p for the Data
+Tranformation component and so on.
+
+
+
+
+Understanding config module
+---------------------------
+
+config.yaml will read the information from a file/database and create objects of the config classes
+created in entity module, And will supply all the info. to our pipeline.

@@ -1,6 +1,10 @@
 # End_to_End_ML_Project
 ***This is my first complete end to end machine learning project.***
 
+
+## Explained various project components in ML_Project_Documentation.txt file
+
+
 ## Software & Account Requirements
 
 1. [Github Account](https://github.com)
@@ -61,7 +65,7 @@ git remote -v
 To Setup CI/CD Pipeline in heroku we need 3 information:
 1. HEROKU_EMAIL = <>
 2. HEROKU_API_KEY = <>
-3. HEROKU_APP_NAME = ml-regression-app-avr
+3. HEROKU_APP_NAME = regression-app-avr
 
 BUILD DOCKER IMAGE
 ```
