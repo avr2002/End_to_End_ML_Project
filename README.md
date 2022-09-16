@@ -97,3 +97,13 @@ To install packages & libraries
 ```
 python setup.py install
 ```
+
+Install ipykernel
+```
+pip install ipykernel
+```
+
+Install PyYAMAL
+```
+pip install PyYAML
+```
