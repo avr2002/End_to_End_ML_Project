@@ -64,9 +64,9 @@ Here:
 									   ---------------------------
 
 Data Ingestion --->   Data Validation --------------------> Feature Engeneering/ --->   Model Training    ---->	    Model Evaluation	----> Push the Model
---------------	   -----------------------------------		Data Tranformation		    --------------		        ----------------
-Split Data into		   1.Schema Validation					-------------------		    Model Selection		        - Use Test Dataset
- Train-Test		     (Check - FileName,						Create a Pickle Object	    Hyperparameter Tuning 		- Model Comaprison
+--------------	   -----------------------------------		  Data Tranformation		    --------------		        ----------------
+Split Data into		   1.Schema Validation				 --------------------		    Model Selection		       - Use Test Dataset
+ Train-Test		     (Check - FileName,					Create a Pickle Object	    Hyperparameter Tuning       - Model Comaprison
 (Bring data		      # of columns file has,				for feature engineering,    							
 into system           name & datatype of each column)	  to apply same on test data    Similarly, create a pickle
 via API or URL												(Tranform_Function)  		object of model training
@@ -92,9 +92,9 @@ Prediction Pipeline
 --------------------
 
 Real World Dataset -----> Pass it to Transform_Function  ------> Pass the tranformed dataset   ---------> Directly Get the
-						  to get tranformed dataset				 to predict_function i.e use				Prediction
-						  (i.e use the pickled file				 the pickled file created during
-						  created during 						 Model Training Step.
+						  to get tranformed dataset			  to predict_function i.e use				Prediction
+						  (i.e use the pickled file			  the pickled file created during
+						  created during 					  Model Training Step.
 						  DataTransformation step.
 						
 
@@ -130,6 +130,7 @@ linreg = LinearRegression()
 pickle.dumps(linreg, open('linear_reg_model.pkl', 'wb')) # Saving the trained model
 
 pickled_model = open('linear_reg_model.pkl', 'rb') # Opening the saved model
+
 
 
 

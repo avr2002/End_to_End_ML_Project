@@ -5,7 +5,7 @@ DataIngestionConfig = namedtuple("DataIngestionConfig",
 
 # DataIngestionConfig has dataset_url_link, compressed_file_path, unCompressed_file_path, and train_test_splitted_file_path respectively
 
-DataValidationConfig = namedtuple("DataValidationConfig", ["schema_file_path"])
+DataValidationConfig = namedtuple("DataValidationConfig", ["schema_file_path","report_file_path","report_page_file_path"])
 
 # DataValidationConfig has schema_file_path which validates the file_name, num of columns, datatypes of each column, etc. 
 
@@ -17,7 +17,7 @@ DataTranformationConfig = namedtuple("DataTranformationConfig",["add_bedroom_per
 # DataTranformationConfig contains a new column add_bedroom_per_room, path_of_transformend_train_dataset, path_for_tranformed_test_dataset, and pickle_file_path_for_feature_engeneering
 # The pickle file created for feature engeneering will automatically apply all the feature engeneering on test dataset which was applied on test datset
 
-ModelTrainerConfig = namedtuple("ModelTrainerConfig",["trained_model_file_path","base_accuracy"])
+ModelTrainerConfig = namedtuple("ModelTrainerConfig",["trained_model_file_path","base_accuracy","model_config_file_path"])
 
 # ModelTrainerConfig has pickle_file_path_of_trained_model and a base_accuracy which is, if my model has lower accuracy than this then it'll not be allowed for pickling
 
