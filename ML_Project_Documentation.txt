@@ -233,3 +233,58 @@ Understanding config module
 
 config.yaml will read the information from a file/database and create objects of the config classes
 created in entity module, And will supply all the info. to our pipeline.
+
+
+
+
+
+
+
+How do we create each component? : CODE-Writing-FLOW
+---------------------------------  -----------------
+
+For eg. Data Ingestion: (See project folder & .py files for proper understanding) 
+## (See, 2nd July Live Class Recording to revise the high-level code flow for the project. Watch till first 28:00 mins)
+
+
+in root directory/	------------------> constants			-------------->  Configuration.py			    -------------------> data_ingestion.py				---------------->  pipeline.py		
+config/config.yaml					  ------------------------			----------------------------------				-------------------------------				  ------------	 
+---------------------------			In main code folder,define			In main code folder,define						In main code folder,define					  In pipeline module, define
+in this config.yaml file				a constant module, in which			a config module, in which							a component module, in the .py				  all the methods to execute &
+define all the component's			define all the variables names		define a Configuration class						define all the actual methods					  run the pipeline
+i/p source							required for that component based		& define all the methods/funcs.					to excecute that component
+									on the prev. config.yaml file			to retrieve the data for that compo.
+																					^
+																					|
+																					|
+																					|
+																	entity module is used to give structure
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
