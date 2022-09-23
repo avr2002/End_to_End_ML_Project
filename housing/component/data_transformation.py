@@ -176,7 +176,9 @@ class DataTransformation:
                                                 message="Data Transformation Successfull!")
 
             logging.info(f"Data Transformation Artifact: {data_transformation_artifact}")
-            logging.info(f"{'='*20}Data Transformation Log Completed{'='*20}")
             return data_transformation_artifact
         except Exception as e:
             raise HousingException(e,sys) from e
+
+    def __del__(self):
+        logging.info(f"{'='*20}Data Transformation Log Completed{'='*20} \n\n")
