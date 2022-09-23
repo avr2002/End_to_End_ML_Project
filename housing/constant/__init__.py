@@ -73,3 +73,16 @@ MODEL_EVALUATION_FILE_NAME_KEY = "model_evaluation_file_name"
 MODEL_PUSHER_CONFIG_KEY = "model_pusher_config"
 MODEL_PUSHER_ARTIFACT_DIR_NAME = "model_pusher"
 MODEL_PUSHER_MODEL_EXPORT_DIR_NAME_KEY = "model_export_dir"
+
+# DataTransformation class related variables, used in data_transformation.py
+COLUMN_TOTAL_ROOMS = "total_rooms"
+COLUMN_POPULATION = "population"
+COLUMN_HOUSEHOLDS = "households"
+COLUMN_TOTAL_BEDROOM = "total_bedrooms"
+DATASET_SCHEMA_COLUMN_KEY = "columns"
+
+# NUMERICAL & CATEGORICAL COLUMNS
+NUMERICAL_COLUMN_KEY = "numerical_columns"
+CATEGORICAL_COLUMN_KEY = "categorical_columns"
+
+TARGET_COLUMN_KEY = "target_column"

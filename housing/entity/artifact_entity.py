@@ -1,7 +1,4 @@
 from collections import namedtuple
-from unicodedata import name
-
-from housing.component.data_transformation import DataTransformation
 
 DataIngestionArtifact = namedtuple("DataIngestionArtifact", 
                                    ["train_file_path","test_file_path","is_ingested","message"])
