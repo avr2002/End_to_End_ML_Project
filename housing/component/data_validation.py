@@ -1,4 +1,3 @@
-from cgi import test
 import os,sys
 import pandas as pd
 from housing.logger import logging
